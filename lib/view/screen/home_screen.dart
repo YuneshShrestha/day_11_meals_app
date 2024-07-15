@@ -10,20 +10,28 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Meals App"),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Hello!",
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            Text(
-              "Welcome To Meals App",
-              style: Theme.of(context).textTheme.displaySmall,
-            ),
-            GridItemsWidget(),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20.0,
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Hello!",
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              FittedBox(
+                child: Text(
+                  "Welcome To Meals App",
+                  overflow: TextOverflow.fade,
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+              ),
+              GridItemsWidget(),
+            ],
+          ),
         ),
       ),
     );
