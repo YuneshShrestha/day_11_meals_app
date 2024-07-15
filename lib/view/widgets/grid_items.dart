@@ -7,25 +7,52 @@ class GridItemsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(CategoryController());
+    
     var controller = Get.find<CategoryController>();
     return Obx(() {
-      
-      return GridView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemCount: controller.categoryModel.value.categories.length,
-        itemBuilder: (context, index) {
-          return Card(
-            child: Center(
-                child: Text(controller
-                        .categoryModel.value.categories[index].strCategory ??
-                    "")),
-          );
-        },
-      );
+      var categories = controller.categoryModel.value.categories;
+      var loading = controller.loading.value;
+      return loading == true
+          ? const LinearProgressIndicator()
+          : GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2),
+              itemCount: categories.length,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      "/second_screen",
+                      arguments: categories[index].strCategory,
+                    );
+                  },
+                  child: Card(
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        if (categories[index].strCategoryThumb != null)
+                          FadeInImage(
+                            placeholder:
+                                const AssetImage('assets/no_image.jpg'),
+                            image: NetworkImage(
+                                categories[index].strCategoryThumb!),
+                          ),
+                        // Image.network(categories[index].strCategoryThumb!),
+                        Positioned(
+                          top: 0,
+                          left: 0,
+                          child: Text(
+                            categories[index].strCategory ?? "",
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
     });
   }
 }
