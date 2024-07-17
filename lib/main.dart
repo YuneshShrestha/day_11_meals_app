@@ -22,11 +22,21 @@ class MyApp extends StatelessWidget {
       ),
       // home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
-      routes: {
-        "/": (context) => HomeScreen(),
-        "/second_screen": (context) => SecondScreen(),
-      },
-     initialBinding: ControllerBinding(),
+      // routes: {
+      //   "/": (context) => HomeScreen(),
+      //   "/second_screen": (context) => SecondScreen(),
+      // },
+      // onGenerateRoute: (settings) {
+      //   final args = settings.arguments;
+      //   if (settings.name == '/') {
+      //     return MaterialPageRoute(builder: (_) => const HomeScreen());
+      //   } else if (settings.name == '/second_screen') {
+      //     return MaterialPageRoute(builder: (_) => const SecondScreen());
+      //   } else {
+      //     return MaterialPageRoute(builder: (_) => const DefaultScreen());
+      //   }
+      // },
+      initialBinding: ControllerBinding(),
     );
   }
 }
